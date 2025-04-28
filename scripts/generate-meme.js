@@ -16,7 +16,7 @@ async function buscarTopTemasBrasil() {
         return temas[Math.floor(Math.random() * temas.length)];
     } catch (error) {
         console.error('⚠️ Erro ao buscar Google Trends:', error.message);
-        return "Memes Aleatórios"; // Fallback se falhar
+        return "Memes Aleatórios";
     }
 }
 
@@ -47,14 +47,33 @@ async function buscarImagemPixabay(tema) {
 
 async function postarNoFacebook(imagemURL, texto) {
     const pageAccessToken = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+
+    console.log('📷 Baixando imagem para upload...');
     const imageResponse = await axios.get(imagemURL, { responseType: 'arraybuffer' });
     const imageBuffer = Buffer.from(imageResponse.data, 'binary');
+
+    console.log('📤 Enviando imagem para o Facebook...');
     const formData = new FormData();
     formData.append('caption', texto);
     formData.append('access_token', pageAccessToken);
-    formData.append('source', imageBuffer, { filename: 'meme.jpg', contentType: 'image/jpeg' });
-    const res = await axios.post(`https://graph.facebook.com/v19.0/me/photos`, formData, { headers: formData.getHeaders() });
-    console.log('✅ Meme postado no Facebook:', res.data);
+    formData.append('source', imageBuffer, {
+        filename: 'meme.jpg',
+        contentType: 'image/jpeg'
+    });
+
+    try {
+        const res = await axios.post('https://graph.facebook.com/v19.0/me/photos', formData, {
+            headers: {
+                ...formData.getHeaders()
+            },
+            maxContentLength: Infinity,
+            maxBodyLength: Infinity
+        });
+        console.log('✅ Meme postado no Facebook:', res.data);
+    } catch (error) {
+        console.error('❌ Erro ao postar no Facebook:', error.response ? error.response.data : error.message);
+        throw error;
+    }
 }
 
 async function main() {
@@ -67,7 +86,7 @@ async function main() {
         console.log('🌐 Imagem URL:', imagemURL);
         await postarNoFacebook(imagemURL, fraseMeme);
     } catch (error) {
-        console.error('❌ Erro:', error.message);
+        console.error('❌ Erro geral:', error.message);
     }
 }
 

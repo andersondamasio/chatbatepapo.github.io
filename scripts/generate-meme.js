@@ -22,14 +22,12 @@ async function buscarTopTemasBrasil() {
 
 async function gerarTextoMemeComChatGPT(tema) {
     const prompt = `Crie uma frase curta e engraçada de meme em português do Brasil sobre o tema "${tema}". Use humor brasileiro, memes atuais e mantenha a frase com no máximo 80 caracteres.`;
-
     const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: [{ role: "user", content: prompt }],
         max_tokens: 80,
         temperature: 0.9
     });
-
     return response.choices[0].message.content.trim();
 }
 
@@ -47,6 +45,7 @@ async function buscarImagemPixabay(tema) {
 
 async function postarNoFacebook(imagemURL, texto) {
     const pageAccessToken = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+    const pageId = process.env.FACEBOOK_PAGE_ID;
 
     console.log('📷 Baixando imagem para upload...');
     const imageResponse = await axios.get(imagemURL, { responseType: 'arraybuffer' });
@@ -62,7 +61,7 @@ async function postarNoFacebook(imagemURL, texto) {
     });
 
     try {
-        const res = await axios.post('https://graph.facebook.com/v19.0/me/photos', formData, {
+        const res = await axios.post(`https://graph.facebook.com/v19.0/${pageId}/photos`, formData, {
             headers: {
                 ...formData.getHeaders()
             },
@@ -71,7 +70,7 @@ async function postarNoFacebook(imagemURL, texto) {
         });
         console.log('✅ Meme postado no Facebook:', res.data);
     } catch (error) {
-        console.error('❌ Erro ao postar no Facebook:', error.response ? error.response.data : error.message);
+        console.error('❌ Erro ao postar no Facebook:', error.response ? JSON.stringify(error.response.data) : error.message);
         throw error;
     }
 }

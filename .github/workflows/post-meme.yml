@@ -2,7 +2,9 @@ name: Gerar e Postar Meme no Facebook
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: '0 14 * * *'
+    - cron: '0 16 * * *'  # 13h horário Brasil
+    - cron: '0 22 * * *'  # 19h horário Brasil
+
 jobs:
   gerar-e-postar:
     runs-on: ubuntu-latest

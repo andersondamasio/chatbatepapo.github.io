@@ -4,11 +4,16 @@ const googleTrends = require('google-trends-api');
 const { Configuration, OpenAIApi } = require('openai');
 
 async function buscarTopTemasBrasil() {
-    const resultados = await googleTrends.dailyTrends({ geo: 'BR', hl: 'pt-BR' });
-    const trends = JSON.parse(resultados);
-    const temas = trends.default.trendingSearchesDays[0].trendingSearches.map(item => item.title.query);
-    if (!temas.length) throw new Error('Nenhum tema encontrado.');
-    return temas[Math.floor(Math.random() * temas.length)];
+    try {
+        const resultados = await googleTrends.dailyTrends({ geo: 'BR', hl: 'pt-BR' });
+        const trends = JSON.parse(resultados);
+        const temas = trends.default.trendingSearchesDays[0].trendingSearches.map(item => item.title.query);
+        if (!temas.length) throw new Error('Nenhum tema encontrado.');
+        return temas[Math.floor(Math.random() * temas.length)];
+    } catch (error) {
+        console.error('⚠️ Erro ao buscar Google Trends:', error.message);
+        return "Memes Aleatórios"; // Fallback se falhar
+    }
 }
 
 async function gerarTextoMemeComChatGPT(tema) {

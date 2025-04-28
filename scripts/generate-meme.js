@@ -1,7 +1,11 @@
 const axios = require('axios');
 const FormData = require('form-data');
 const googleTrends = require('google-trends-api');
-const { Configuration, OpenAIApi } = require('openai');
+const OpenAI = require('openai');
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+});
 
 async function buscarTopTemasBrasil() {
     try {
@@ -17,16 +21,16 @@ async function buscarTopTemasBrasil() {
 }
 
 async function gerarTextoMemeComChatGPT(tema) {
-    const configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY });
-    const openai = new OpenAIApi(configuration);
     const prompt = `Crie uma frase curta e engraçada de meme em português do Brasil sobre o tema "${tema}". Use humor brasileiro, memes atuais e mantenha a frase com no máximo 80 caracteres.`;
-    const response = await openai.createChatCompletion({
+
+    const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: [{ role: "user", content: prompt }],
         max_tokens: 80,
         temperature: 0.9
     });
-    return response.data.choices[0].message.content.trim();
+
+    return response.choices[0].message.content.trim();
 }
 
 async function buscarImagemPixabay(tema) {

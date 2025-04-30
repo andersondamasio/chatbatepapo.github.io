@@ -1,0 +1,37 @@
+name: gerar-conteudo-chatbatepapo
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  gerar-e-publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar o repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar dependências
+        run: npm install axios
+
+      - name: Executar script de geração de conteúdo
+        run: node scripts/gerar-conteudo.js
+
+      - name: Executar script com IA
+        run: node scripts/gerar-frase-com-ia.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Commitar e publicar as mudanças
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "🤖 Conteúdo atualizado automaticamente"
+          git push

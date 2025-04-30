@@ -8,7 +8,6 @@ on:
 jobs:
   gerar-e-publicar:
     runs-on: ubuntu-latest
-    environment: Facebook
     steps:
       - name: Clonar o repositório
         uses: actions/checkout@v4

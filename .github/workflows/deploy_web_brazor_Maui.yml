@@ -22,13 +22,16 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Restore dependencies
+      - name: Restore only Web project dependencies
         run: dotnet restore ChatClubeMauiApp.Web/ChatClubeMauiApp.Web.csproj
 
-      - name: Build
+      - name: Clean old build outputs
+        run: dotnet clean ChatClubeMauiApp.Web/ChatClubeMauiApp.Web.csproj
+
+      - name: Build Web project only
         run: dotnet build ChatClubeMauiApp.Web/ChatClubeMauiApp.Web.csproj --configuration Release --no-restore
 
-      - name: Publish only Web project
+      - name: Publish Web project (no dependencies)
         run: dotnet publish ChatClubeMauiApp.Web/ChatClubeMauiApp.Web.csproj --configuration Release --output ./publish --no-build --no-dependencies -p:UseAppHost=true -p:AspNetCoreHostingModel=InProcess
 
       - name: Upload artifact

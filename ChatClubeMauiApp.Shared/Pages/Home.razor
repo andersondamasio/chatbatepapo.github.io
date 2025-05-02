@@ -1,0 +1,40 @@
+﻿@page "/"
+
+@using ChatClubeMauiApp.Shared.Models
+@using ChatClubeMauiApp.Shared.Services
+@inject ChatClubeMauiApp.Shared.Services.VisitanteServ.IVisitanteService VisitanteService
+
+
+<PageTitle>Home</PageTitle>
+
+
+<h1>Visitantes</h1>
+
+@if (visitantes == null)
+{
+    <p>Carregando...</p>
+}
+else if (visitantes.Count == 0)
+{
+    <p>Nenhum visitante encontrado.</p>
+}
+else
+{
+    <ul>
+        @foreach (var v in visitantes)
+        {
+            <li>@v.Nome</li>
+        }
+    </ul>
+}
+
+
+@code {
+    private List<Visitante>? visitantes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        visitantes = await VisitanteService.GetVisitantesAsync();
+    }
+
+}

@@ -65,5 +65,5 @@ jobs:
       - name: Deploy para Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: nome-do-seu-app-no-azure
+          app-name: anderson
           package: ./app

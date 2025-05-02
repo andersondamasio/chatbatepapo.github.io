@@ -57,6 +57,6 @@ jobs:
       - name: Deploy para Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'anderson-gjd2awhcc3hgd0fr'  # ajuste para o nome do App Service real
+          app-name: 'anderson'  # ajuste para o nome do App Service real
           slot-name: 'production'
           package: .

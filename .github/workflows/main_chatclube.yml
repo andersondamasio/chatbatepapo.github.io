@@ -8,14 +8,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+
+      - name: Detectar versão do SDK do global.json
+        id: set_version
+        run: |
+          VERSION=$(jq -r .sdk.version global.json)
+          echo "sdk_version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.x'
+          dotnet-version: ${{ steps.set_version.outputs.sdk_version }}
 
       - name: Restaurar dependências
         run: dotnet restore
@@ -24,34 +31,33 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Publicar
-        run: dotnet publish -c Release -o app
+        run: dotnet publish -c Release -o ./publish --no-build
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: app
-          path: app
+          path: ./publish
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
+
     steps:
-      - name: Baixar artifact
-        uses: actions/download-artifact@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v3
         with:
           name: app
-          path: app
 
-      - name: Login com Azure usando Managed Identity
+      - name: Login com identidade gerenciada do Azure
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          enable-managed-identity: true
 
-      - name: Deploy para Azure App Service
+      - name: Deploy para Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: anderson
-          package: app
+          app-name: 'anderson' # nome exato do seu Web App no Azure
+          package: .

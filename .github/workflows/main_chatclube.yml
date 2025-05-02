@@ -16,7 +16,7 @@ jobs:
       - name: Setup .NET 9 Preview
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.100-preview.4.24266.19'
+          dotnet-version: '9.x'
 
       - name: Restaurar dependências
         run: dotnet restore

@@ -1,23 +1,60 @@
-steps:
-  - name: Checkout
-    uses: actions/checkout@v3
+name: Build and Deploy ASP.NET Core ChatClube with PostgreSQL
 
-  - name: Setup .NET
-    uses: actions/setup-dotnet@v4
-    with:
-      dotnet-version: '9.0.100-preview.3'
+on:
+  push:
+    branches:
+      - main
 
-  - name: Restore
-    run: dotnet restore
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-  - name: Build
-    run: dotnet build -c Release
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-  - name: Publish
-    run: dotnet publish -c Release -o ./publish
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.100-preview.3'
 
-  - name: Upload artifact
-    uses: actions/upload-artifact@v4
-    with:
-      name: app
-      path: ./publish
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Publish
+        run: dotnet publish --no-build --configuration Release --output ./publish
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: ./publish
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: production
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app
+          path: ./publish
+
+      - name: Azure Login with Managed Identity
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'chatclube' # nome do app no Azure
+          package: ./publish

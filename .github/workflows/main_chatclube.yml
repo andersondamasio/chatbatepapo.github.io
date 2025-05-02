@@ -1,4 +1,4 @@
-name: Build and Deploy ASP.NET Core ChatClube with PostgreSQL
+name: Build and Deploy ASP.NET Core with PostgreSQL
 
 on:
   push:
@@ -44,9 +44,7 @@ jobs:
     - name: Azure Login
       uses: azure/login@v2
       with:
-        client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-        tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
-        subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy to WebApp
       uses: azure/webapps-deploy@v3

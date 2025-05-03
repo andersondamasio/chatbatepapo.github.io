@@ -1,0 +1,59 @@
+# Build Results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+.vscode/
+
+# Rider
+.idea/
+
+# Auto-generated files
+Generated_Code/
+*.g.cs
+*.g.i.cs
+*.assemblyattributes.cs
+
+# Debug/Release Folders
+**/Debug/
+**/Release/
+
+# MAUI/Android/iOS/macOS specific
+*.apk
+*.aab
+*.apks
+*.xcuserstate
+*.xcodeproj/
+*.xcworkspace/
+*.xcassets/
+*.ipa
+*.dSYM/
+**/platforms/android/app/build/
+**/platforms/ios/build/
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs
+*.log
+
+# SQLite Databases
+*.db
+*.db-wal
+*.db-shm
+
+# Other
+.env
+node_modules/

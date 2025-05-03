@@ -13,5 +13,9 @@ namespace ChatClubeMauiApp.Shared.Services
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Visitante> Visitantes { get; set; }
+
+        public DbSet<Usuario> Usuarios => Set<Usuario>();
+        public DbSet<Sala> Salas => Set<Sala>();
+        public DbSet<Mensagem> Mensagens => Set<Mensagem>();
     }
 }

@@ -1,0 +1,41 @@
+
+.user-list {
+    width: 220px;
+    background-color: #f4f6f9;
+    padding: 1rem;
+    border-right: 1px solid #ddd;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+.user-list h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+.user-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.user-list li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.status.online {
+    background-color: #28a745;
+}

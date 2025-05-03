@@ -1,0 +1,16 @@
+@page "/"
+
+
+
+<div class="container-index">
+    <h2 class="titulo">Escolha uma sala de Chat</h2>
+
+    <div class="sala-lista">
+        @foreach (var sala in Salas)
+        {
+            <button class="sala-btn" @onclick="() => EntrarNaSala(sala)">
+                <span class="icon">💬</span> @sala
+            </button>
+        }
+    </div>
+</div>

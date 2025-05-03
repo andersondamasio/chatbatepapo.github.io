@@ -32,10 +32,10 @@ builder.Services.AddScoped<IVisitanteService, VisitanteService>();
 
 
 #if DEBUG
-builder.WebHost.ConfigureKestrel(options =>
+/*builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(5000);
-});
+});*/
 
 #endif
 

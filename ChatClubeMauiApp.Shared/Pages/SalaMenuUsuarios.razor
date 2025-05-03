@@ -1,0 +1,17 @@
+@using ChatClubeMauiApp.Shared.Models
+
+
+@inject NavigationManager Navigation
+
+@if (Navigation.Uri.Contains("/chat/"))
+{
+    <aside class="user-list">
+        <h3>Usuários na Sala</h3>
+        <ul>
+            @foreach (var user in usuarios)
+            {
+                <li><span class="status online"></span> @user</li>
+            }
+        </ul>
+    </aside>
+}

@@ -1,0 +1,25 @@
+@page "/chat/{sala}"
+@layout ChatClubeMauiApp.Shared.Pages.MainLayout
+
+@using ChatClubeMauiApp.Shared.Models
+
+
+<h1 class="chat-header">@sala</h1>
+
+<div class="chat-container">
+    <div class="messages">
+        @foreach (var msg in mensagens)
+        {
+            <div class="message @(msg.Usuario == usuarioAtual ? "own" : "")">
+                <span class="user">@msg.Usuario:</span> <span class="text">@msg.Texto</span>
+            </div>
+        }
+    </div>
+
+    <div class="input-area">
+        <input @bind="novaMensagem" @bind:event="oninput" @onkeypress="CheckEnter" placeholder="Digite uma mensagem..." />
+        <button @onclick="EnviarMensagem">Enviar</button>
+    </div>
+
+    <button class="btn-voltar" @onclick="Voltar">← Voltar</button>
+</div>

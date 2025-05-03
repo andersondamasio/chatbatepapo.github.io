@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main-layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #ecf0f1;
+}
+
+.nav-menu {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    height: 100%;
+    min-width: 220px;
+}
+
+.nav-header h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-list li {
+    margin-bottom: 15px;
+}
+
+.nav-list a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-list a.active {
+    color: #1abc9c;
+}
+
+.room-list {
+    list-style: none;
+    padding: 0;
+}
+
+.room-list li {
+    margin-bottom: 10px;
+}
+
+.sala-layout {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+}
+
+.chat-body {
+    flex-grow: 1;
+    padding: 10px;
+    background-color: white;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+}
+
+.chat-message {
+    margin-bottom: 8px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background-color: #eee;
+    border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 8px;
+}

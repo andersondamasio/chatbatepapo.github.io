@@ -38,7 +38,7 @@ platforms/
 
 ## Secrets e configurações locais
 secrets.json
-appsettings.json
+**/appsettings.json
 appsettings.Development.json
 **/appsettings.Development.json
 **/appsettings.Local.json

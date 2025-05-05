@@ -4,6 +4,7 @@ obj/
 build/
 app/bin/
 app/obj/
+.vs/
 
 ## Ignorar logs
 *.log

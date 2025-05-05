@@ -1,4 +1,4 @@
-﻿using ChatClubeMauiApp.Shared.Models;
+﻿using ChatClubeMauiApp.Shared.Models.Visitantes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,8 +10,8 @@ namespace ChatClubeMauiApp.Shared.Services.VisitanteServ
 {
     public class VisitanteService : IVisitanteService
     {
-        private readonly AppDbContext _context;
-        public VisitanteService(AppDbContext context) => _context = context;
+        private readonly ChatClubeDbContext _context;
+        public VisitanteService(ChatClubeDbContext context) => _context = context;
         public Task<List<Visitante>> GetVisitantesAsync() => _context.Visitantes.ToListAsync();
     }
 

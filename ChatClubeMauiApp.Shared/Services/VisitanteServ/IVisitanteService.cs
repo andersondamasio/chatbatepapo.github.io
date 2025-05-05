@@ -1,4 +1,4 @@
-﻿using ChatClubeMauiApp.Shared.Models;
+﻿using ChatClubeMauiApp.Shared.Models.Visitantes;
 
 namespace ChatClubeMauiApp.Shared.Services.VisitanteServ
 {

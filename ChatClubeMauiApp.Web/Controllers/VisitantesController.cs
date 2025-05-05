@@ -1,4 +1,4 @@
-﻿using ChatClubeMauiApp.Shared.Models;
+﻿using ChatClubeMauiApp.Shared.Models.Visitantes;
 using ChatClubeMauiApp.Shared.Services.VisitanteServ;
 using Microsoft.AspNetCore.Mvc;
 

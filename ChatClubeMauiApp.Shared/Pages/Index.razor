@@ -1,16 +1,32 @@
 @page "/"
 
+<header>
+    <h1>Chat Clube</h1>
+    <p>Entre em uma sala de bate-papo agora mesmo!</p>
+</header>
 
-
-<div class="container-index">
-    <h2 class="titulo">Escolha uma sala de Chat</h2>
-
-    <div class="sala-lista">
-        @foreach (var sala in Salas)
-        {
-            <button class="sala-btn" @onclick="() => EntrarNaSala(sala)">
-                <span class="icon">💬</span> @sala
-            </button>
-        }
-    </div>
+<div class="login-buttons">
+    <button class="google" @onclick="LoginComGoogle">Entrar com Google</button>
+    <button class="facebook" @onclick="LoginComFacebook">Entrar com Facebook</button>
 </div>
+
+<div class="online-count">
+    👥 Total de usuários online: <strong>@TotalUsuarios</strong>
+</div>
+
+<div class="salas">
+    @foreach (var sala in SalasDisponiveis)
+    {
+        <div class="sala">
+            <div class="sala-info">
+                <strong>@sala.Nome</strong>
+                <span>Usuários: @sala.UsuariosOnline</span>
+            </div>
+            <button @onclick="() => EntrarNaSala(sala.Nome)">Entrar</button>
+        </div>
+    }
+</div>
+
+<footer>
+    &copy; 2025 ChatClube. Todos os direitos reservados. | <a href="#">Contato</a>
+</footer>

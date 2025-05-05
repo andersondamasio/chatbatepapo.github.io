@@ -5,9 +5,9 @@ using System.IO;
 
 namespace ChatClubeMauiApp.Shared.Services
 {
-    public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    public class AppDbContextFactory : IDesignTimeDbContextFactory<ChatClubeDbContext>
     {
-        public AppDbContext CreateDbContext(string[] args)
+        public ChatClubeDbContext CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../ChatClubeMauiApp.Web"))
@@ -16,10 +16,10 @@ namespace ChatClubeMauiApp.Shared.Services
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<ChatClubeDbContext>();
             optionsBuilder.UseNpgsql(connectionString);
 
-            return new AppDbContext(optionsBuilder.Options);
+            return new ChatClubeDbContext(optionsBuilder.Options);
         }
     }
 }

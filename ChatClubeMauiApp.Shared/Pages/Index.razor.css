@@ -1,51 +1,82 @@
-.container-index {
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f2f2f2;
+}
+
+header {
+    background-color: #3b5998;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.login-buttons {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 2rem;
-    min-height: 80vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7fa;
+    gap: 1rem;
+    margin: 1rem 0;
 }
 
-.titulo {
-    font-size: 2.2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    color: #1c1c1c;
+    .login-buttons button {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+.google {
+    background-color: #db4437;
+    color: white;
 }
 
-.sala-lista {
+.facebook {
+    background-color: #4267B2;
+    color: white;
+}
+
+.online-count {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.salas {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.sala {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sala-info {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    max-width: 350px;
 }
 
-.sala-btn {
-    background-color: #007bff;
-    color: #fff;
+.sala button {
+    background-color: #3b5998;
+    color: white;
     border: none;
-    border-radius: 10px;
-    padding: 14px 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
 }
 
-.sala-btn:hover {
-    background-color: #0056b3;
-    transform: scale(1.02);
-}
-
-.icon {
-    font-size: 1.2rem;
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #ddd;
+    font-size: 0.9rem;
 }

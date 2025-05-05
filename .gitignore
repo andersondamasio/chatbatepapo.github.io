@@ -1,59 +1,69 @@
-# Build Results
+## Ignore arquivos de build e output
 bin/
 obj/
-out/
+build/
+app/bin/
+app/obj/
 
-# User-specific files
+## Ignorar logs
+*.log
+
+## Arquivos temporários de usuário
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
 
-# Visual Studio
-.vs/
+## Configurações do VS Code
 .vscode/
 
-# Rider
-.idea/
+## Diretórios de dependências
+node_modules/
 
-# Auto-generated files
-Generated_Code/
-*.g.cs
-*.g.i.cs
-*.assemblyattributes.cs
+## Arquivos de publicação
+publish/
+*.db
+*.pdb
+*.cache
+*.pidb
 
-# Debug/Release Folders
-**/Debug/
-**/Release/
-
-# MAUI/Android/iOS/macOS specific
+## Ignore arquivos específicos do MAUI
 *.apk
 *.aab
 *.apks
-*.xcuserstate
-*.xcodeproj/
-*.xcworkspace/
-*.xcassets/
 *.ipa
-*.dSYM/
-**/platforms/android/app/build/
-**/platforms/ios/build/
+*.xcarchive/
+*.xcuserstate
+platforms/
 
-# NuGet
-*.nupkg
-packages/
+## Secrets e configurações locais
+secrets.json
+appsettings.json
+appsettings.Development.json
+**/appsettings.Development.json
+**/appsettings.Local.json
+.env
+
+## Certificados
+*.pfx
+*.key
+*.cer
+*.pem
+
+## .NET específicos
 project.lock.json
 project.fragment.lock.json
 artifacts/
+*.nupkg
+*.snupkg
 
-# Logs
-*.log
+## Arquivos do Rider
+.idea/
+*.sln.iml
 
-# SQLite Databases
-*.db
-*.db-wal
-*.db-shm
+## Arquivos do Mac (se usar)
+.DS_Store
 
-# Other
-.env
-node_modules/
+## GitHub Copilot temporário
+*.copilot*
+
